@@ -1,8 +1,8 @@
 import { GraphQLClient } from 'graphql-request';
 import { LESSONS_QUERY, QueryResponse, LessonWithUrl } from './types.js';
-import fs from 'fs/promises';
-import path from 'path';
-import dotenv from 'dotenv';
+import { promises as fs } from 'fs';
+import * as path from 'path';
+import * as dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -33,9 +33,9 @@ async function fetchLessons(releaseIds: number[]): Promise<void> {
       LESSONS_QUERY,
       { releaseIds }
     );
-    
+
     console.log('Raw data from Hasura:', JSON.stringify(data, null, 2));
-    
+
     const lessonsWithUrls: LessonWithUrl[] = data.lessons.map((lesson) => ({
       ...lesson,
       url: `${BASE_URL}/teachers/lessons/${lesson.slug}`,
@@ -49,6 +49,7 @@ async function fetchLessons(releaseIds: number[]): Promise<void> {
     );
 
     console.log(`Successfully saved ${lessonsWithUrls.length} lessons`);
+
   } catch (error) {
     console.error('Error fetching lessons:', error);
     throw error;
@@ -57,5 +58,11 @@ async function fetchLessons(releaseIds: number[]): Promise<void> {
 
 // Create data directory if it doesn't exist
 fs.mkdir(path.join(__dirname, '../data'), { recursive: true })
-  .then(() => fetchLessons([542, 543]))
+  .then(() => {
+    // Parse releaseIds from command line arguments.
+    // Slice the arguments to skip node and the script name.
+    // Convert to numbers and filter out any non-numeric values.
+    const releaseIds = process.argv.slice(2).map(Number).filter(id => !isNaN(id));
+    return fetchLessons(releaseIds);
+  })
   .catch(console.error);
