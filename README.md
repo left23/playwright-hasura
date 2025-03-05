@@ -1,56 +1,47 @@
-### This project will
-- Fetch lessons from your Hasura GraphQL endpoint
+## This project will
+- Fetch lessons with specific release IDs from Hasura GraphQL endpoint
 - Transform the data to include the full URL
 - Save the data to data/lessons.json
 - Run Playwright tests on each lesson URL
-
+- Provide Playwright test report
 
 ## Project structure
-
-- GraphQL query and types (src/types.ts)
-- Fetcher script (src/fetchLessons.ts)
-- Playwright test script (src/testLessons.ts)
-
+- GraphQL query and types (`src/types.ts`), using graphql-request
+- Fetch script (`src/fetchLessons.ts`)
+- Playwright test script (`tests/`)
 
 ## Setup
 
-```
-npm init -y
-npm install typescript @types/node graphql-request playwright
-npx tsc --init
-```
-# Install ts-node
+1. Install necessary packages - typescript, graphql-request, playwright etc.
+`npm i`
+And ts-node globally as needed
 `npm install -g ts-node`
 
-
-1. Copy the example environment file:
+2. Copy the example environment file:
 `cp .env.example .env`
 
-2. Update the `.env` file with your values:
-- `HASURA_ENDPOINT`: Your Hasura GraphQL endpoint
-- `HASURA_ADMIN_SECRET`: Your Hasura admin secret (if required)
+3. Update the `.env` file with your values:
+- `HASURA_URL`: Your Hasura GraphQL endpoint
+- `HASURA_AUTH_KEY`: Your Hasura admin secret (if required)
 - `BASE_URL`: The base URL
 
-
 ## Build
-```
-npm run build
-ts-node src/fetchLessons.ts
-```
+`npm run build`
+TypeScript Compiler (see `tsconfig.json`) generates javascript files from the typescript files.
 
-## Fetch
+## Fetch lessons
+`npm run fetch [release ID]`
+Example: `npm run fetch 542 543`
+Fetches lessons from specific release IDs and saves them as an array to `data/lessons.json`
 ```
-npm run fetch
-ts-node src/fetchLessons.ts --releaseIds=253,254
+  {
+    "title": "Title of lesson",
+    "slug": "title-of-lesson",
+    "lesson_uid": "LESS-XXXXX-00000",
+    "url": "https://www.thenational.academy/teachers/lessons/title-of-lesson"
+  }
 ```
 
 ## Run tests
-```
-npm run test
-npx playwright test
-```
-
-## To do
-- Limit return for quick testing
-- Imrpove error handling
-- Expand tests
+`npm run test`
+Runs Playwright tests contained `tests`
