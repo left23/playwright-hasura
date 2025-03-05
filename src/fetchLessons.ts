@@ -8,23 +8,23 @@ import { dirname } from 'path';
 
 dotenv.config();
 
-const HASURA_ENDPOINT = process.env.HASURA_ENDPOINT;
-const HASURA_ADMIN_SECRET = process.env.HASURA_ADMIN_SECRET;
+const HASURA_URL = process.env.HASURA_URL;
+const HASURA_AUTH_KEY = process.env.HASURA_AUTH_KEY;
 const BASE_URL = process.env.BASE_URL;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-if (!HASURA_ENDPOINT || !BASE_URL) {
+if (!HASURA_URL || !BASE_URL) {
   throw new Error('Missing required environment variables');
 }
 async function fetchLessons(releaseIds: number[]): Promise<void> {
-  if (!HASURA_ENDPOINT) {
+  if (!HASURA_URL) {
     throw new Error('HASURA_ENDPOINT is required');
   }
-  const client = new GraphQLClient(HASURA_ENDPOINT, {
+  const client = new GraphQLClient(HASURA_URL, {
     headers: {
-      ...(HASURA_ADMIN_SECRET && { 'x-hasura-admin-secret': HASURA_ADMIN_SECRET }),
+      ...(HASURA_AUTH_KEY && { 'x-hasura-admin-secret': HASURA_AUTH_KEY }),
     },
   });
 
