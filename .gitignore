@@ -5,6 +5,9 @@ dist/
 # Json
 /data
 
+# Typescript compilation
+/src/*.js
+
 # Playwright
 /test-results/
 /playwright-report/
