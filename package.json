@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "fetch": "NODE_OPTIONS='--loader ts-node/esm' ts-node src/fetchLessons.ts",
+    "fetch": "node src/fetchLessons.js",
     "test": "npx playwright test"
   },
   "keywords": [],
