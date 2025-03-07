@@ -58,3 +58,8 @@ Fetches lessons from specific release IDs and saves them as an array to `data/le
 npm run test
 ```
 Runs Playwright tests contained in `tests`
+
+
+### Playwright tests
+1. Check that lesson `<title>` matches titles from array
+2. Check that lesson HTTP response status is 200
