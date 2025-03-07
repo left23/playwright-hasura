@@ -13,12 +13,18 @@
 ## Setup
 
 1. Install necessary packages - typescript, graphql-request, playwright etc.
-```npm i```
+```
+npm i
+```
 And ts-node globally as needed
-```npm install -g ts-node```
+```
+npm install -g ts-node
+```
 
 2. Copy the example environment file:
-```cp .env.example .env```
+```
+cp .env.example .env
+```
 
 3. Update the `.env` file with your values:
 - `HASURA_URL`: Your Hasura GraphQL endpoint
@@ -26,12 +32,17 @@ And ts-node globally as needed
 - `BASE_URL`: The base URL
 
 ## Build
-```npm run build```
+```
+npm run build
+```
 TypeScript Compiler (see `tsconfig.json`) generates javascript files from the typescript files.
 
 ## Fetch lessons
-```npm run fetch [release ID]```
+```
+npm run fetch [release ID]
+```
 Example: `npm run fetch 542 543`
+
 Fetches lessons from specific release IDs and saves them as an array to `data/lessons.json`
 ```
   {
@@ -43,5 +54,7 @@ Fetches lessons from specific release IDs and saves them as an array to `data/le
 ```
 
 ## Run tests
-```npm run test```
+```
+npm run test
+```
 Runs Playwright tests contained in `tests`
