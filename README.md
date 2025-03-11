@@ -54,11 +54,21 @@ Fetches lessons from specific release IDs and saves them as an array to `data/le
 ```
 
 ## Run tests
+Runs Playwright tests contained in `tests`
 ```
 npm run test
 ```
-Runs Playwright tests contained in `tests`
 
+Run a specific test:
+```
+npm run test response-status.spec.ts
+
+```
+Run only the tests that failed in the last test run:
+```
+npm run test --last-failed
+
+```
 
 ### Playwright tests
 1. Check that lesson `<title>` matches titles from array
