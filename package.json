@@ -1,5 +1,5 @@
 {
-  "name": "listofurls",
+  "name": "playwright-hasura-tests",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
