@@ -7,12 +7,7 @@ lessonUrls.forEach(({title, url, slug}) => {
   test(`Check lesson "${slug}" response status`, async ({ page }) => {
     console.log(`Testing URL: ${url}`);
 
-    await page.goto(url);
-
-    // Check HTTP response status.
-    const response = await page.waitForResponse(response =>
-      response.status() === 200
-    );
+    const response = await page.goto(url);
+    expect(response?.status()).toBe(200);
   });
-
 });
