@@ -61,12 +61,23 @@ npm run test
 
 Run a specific test:
 ```
-npm run test response-status.spec.ts
+npm run test response-status
+npm run test check-page-title
 
 ```
 Run only the tests that failed in the last test run:
 ```
 npm run test --last-failed
+
+```
+Run the tests via the Playwright UI:
+```
+npx playwright test --ui
+
+```
+Run the tests in headed mode:
+```
+npx playwright test --headed
 
 ```
 
